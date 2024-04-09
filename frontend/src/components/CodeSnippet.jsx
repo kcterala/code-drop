@@ -9,13 +9,6 @@ import "ace-builds/src-noconflict/ext-language_tools";
 import { getPong, getSubmissionOutput } from '../apis/api';
 
 const CodeSnippet = () => {
-    const [submission, setSubmission] = useState({
-        language: "JS",
-        code: "console.log('hello')"
-    });
-
-    const [output, setOutput] = useState();
-
     const placeholderCode = {
         JS: "function main() {\n   console.log('hello')\n}\n\nmain()",
         JAVA: "public class Main {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, world!\");\n    }\n}",
@@ -23,6 +16,15 @@ const CodeSnippet = () => {
         PYTHON: "def main():\n    print(\"Hello, world!\")\n\nif __name__ == \"__main__\":\n    main()\n"
 
     };
+
+    const [submission, setSubmission] = useState({
+        language: "JS",
+        code: placeholderCode['JS']
+    });
+
+    const [output, setOutput] = useState();
+
+
 
     const handleLanguageChange = (e) => {
         const selectedLanguage = e.target.value;
@@ -66,7 +68,7 @@ const CodeSnippet = () => {
                     <select
                         id='language'
                         name='language'
-                        className='border-2 border-neutral-800 rounded-lg bg-gray-700 text-white px-2 py-2'
+                        className='border-2 border-neutral-800 rounded-lg bg-gray-700 text-white px-2 py-2 mb-5'
                         onChange={handleLanguageChange}
                         value={submission.language} // Set value to submission.language
                     >
