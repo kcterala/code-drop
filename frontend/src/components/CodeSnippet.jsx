@@ -74,7 +74,6 @@ const CodeSnippet = () => {
                     >
                         <option value="JS">JavaScript</option>
                         <option value="JAVA">Java</option>
-                        <option value="GO">Go</option>
                         <option value="PYTHON">Python</option>
                     </select>
                 </div>

@@ -111,7 +111,6 @@ public class CodeService {
 
         CustomLogContainerResultCallback customLogContainerResultCallback = new CustomLogContainerResultCallback();
 
-        // Capture output
         List<String> output;
         dockerClient.logContainerCmd(container.getId())
                 .withStdOut(true)

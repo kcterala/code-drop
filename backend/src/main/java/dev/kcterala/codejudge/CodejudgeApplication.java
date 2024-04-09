@@ -40,6 +40,6 @@ public class CodejudgeApplication implements CommandLineRunner {
 
 	@GetMapping("ping")
 	public ResponseEntity<String> test() {
-		return ResponseEntity.ok("Hi Dharani, Love you <3");
+		return ResponseEntity.ok("pong ");
 	}
 }

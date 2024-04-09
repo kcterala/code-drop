@@ -56,5 +56,10 @@ jobs:
           port: 22
           script: |
             tar -xzvf /tmp/deployment_package.tar.gz -C /tmp
-            pkill -f 'java -jar' || true
-            nohup java -jar /tmp/deployment_package/application.jar > app.log 2>&1 &
+            PID=$(lsof -ti:8080) || true
+            if [ ! -z "$PID" ]; then
+            kill $PID || true
+            fi
+            cd /tmp/deployment_package
+            nohup java -jar application.jar > app.log 2>&1 &
+            exit 0
