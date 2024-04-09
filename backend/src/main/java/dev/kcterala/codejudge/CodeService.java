@@ -109,12 +109,6 @@ public class CodeService {
         dockerClient.startContainerCmd(container.getId()).exec();
 
 
-        dockerClient.execCreateCmd(container.getId())
-                .withWorkingDir("/judge/")
-                .withCmd("javac *.java && java $(basename *.java .java)")
-                .exec();
-
-
         CustomLogContainerResultCallback customLogContainerResultCallback = new CustomLogContainerResultCallback();
 
         // Capture output
@@ -131,7 +125,7 @@ public class CodeService {
 
         output.forEach(System.out::println);
 
-        dockerClient.removeContainerCmd(container.getId());
+        dockerClient.removeContainerCmd(container.getId()).exec();
         logger.info("Removed Docker container - {}", System.currentTimeMillis() - start);
         long latency = System.currentTimeMillis() - start;
         logger.info("Time taken {} secs", latency / 1000);
