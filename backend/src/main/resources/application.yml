@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Code-Judge
+  output:
+    ansi:
+      enabled: ALWAYS
