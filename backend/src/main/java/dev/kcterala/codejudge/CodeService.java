@@ -69,7 +69,7 @@ public class CodeService {
     }
 
     private String buildImage(String directoryName) {
-        logger.info("Bulding " + directoryName + " Image");
+        logger.info("Building {} Image", directoryName);
         File dockerfile = new File("DockerImages/" + directoryName + "/Dockerfile");
         BuildImageResultCallback buildImageResultCallback = new BuildImageResultCallback();
         return dockerClient.buildImageCmd()
@@ -80,27 +80,27 @@ public class CodeService {
 
 
     public List<String> processCodeSnippet(CodeSnippet codeSnippet) throws IOException, InterruptedException {
-        Language language = codeSnippet.language;
-        String imageId = dockerImages.get(language);
-        String extension = switch (language) {
+        final Language language = codeSnippet.language;
+        final String imageId = dockerImages.get(language);
+        final String extension = switch (language) {
             case JAVA -> ".java";
             case JS -> ".js";
             case GO -> ".go";
             case PYTHON -> ".py";
         };
 
-        String fileName = switch (language) {
+        final String fileName = switch (language) {
             case JAVA -> "Main";
             default -> "code";
         };
 
-        File file = new File(fileName + extension);
-        FileOutputStream fos = new FileOutputStream(file);
+        final File file = new File(fileName + extension);
+        final FileOutputStream fos = new FileOutputStream(file);
         fos.write(codeSnippet.code.getBytes(StandardCharsets.UTF_8));
         fos.close();
-        long start = System.currentTimeMillis();
+        final long start = System.currentTimeMillis();
         logger.info("Creating Docker container");
-        CreateContainerResponse container = dockerClient.createContainerCmd(imageId).exec();
+        final CreateContainerResponse container = dockerClient.createContainerCmd(imageId).exec();
         dockerClient.copyArchiveToContainerCmd(container.getId())
                 .withHostResource(file.getAbsolutePath())
                 .withRemotePath("/judge/")
@@ -109,7 +109,7 @@ public class CodeService {
         dockerClient.startContainerCmd(container.getId()).exec();
 
 
-        CustomLogContainerResultCallback customLogContainerResultCallback = new CustomLogContainerResultCallback();
+        final CustomLogContainerResultCallback customLogContainerResultCallback = new CustomLogContainerResultCallback();
 
         List<String> output;
         dockerClient.logContainerCmd(container.getId())

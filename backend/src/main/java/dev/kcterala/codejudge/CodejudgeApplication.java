@@ -27,12 +27,11 @@ public class CodejudgeApplication implements CommandLineRunner {
 
 	@Override
 	public void run(final String... args) throws Exception {
-		CodeService codeService = new CodeService();
 		codeService.setupDockerImages();
 	}
 
-	@PostMapping("/hello")
-	public ResponseEntity<String> sayHello(@RequestBody CodeSnippet codeSnippet) throws IOException, InterruptedException {
+	@PostMapping("/submission")
+	public ResponseEntity<String> processSubmission(@RequestBody CodeSnippet codeSnippet) throws IOException, InterruptedException {
 		logger.info("Processing code with language {}", codeSnippet.language);
 		List<String> strings = codeService.processCodeSnippet(codeSnippet);
 		return ResponseEntity.ok(String.join("\n", strings));
