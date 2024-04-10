@@ -4,7 +4,7 @@ import CodeSnippet from './components/CodeSnippet'
 
 const App = () => {
   return (
-    <div className='bg-slate-900 h-screen'>
+    <div>
       <Navbar/>
       <CodeSnippet/>
     </div>

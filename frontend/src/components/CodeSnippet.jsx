@@ -60,13 +60,13 @@ const CodeSnippet = () => {
     }];
 
     return (
-        <div className='px-44'>
-            <div className='flex justify-between'>
-                <div>
+        <div className='px-5 md:px-10 lg:px-20 xl:px-32'>
+            <div className='flex flex-col md:flex-row justify-between'>
+                <div className='mb-5 md:mb-0 md:mr-5 w-full md:w-auto'>
                     <select
                         id='language'
                         name='language'
-                        className='border-2 border-neutral-800 rounded-lg bg-gray-700 text-white px-2 py-2 mb-5 font-mono'
+                        className='border-2 border-neutral-800 rounded-lg bg-gray-700 text-white px-2 py-2 mb-5 font-mono w-full'
                         onChange={handleLanguageChange}
                         value={submission.language}
                         disabled={loading}
@@ -89,8 +89,8 @@ const CodeSnippet = () => {
                     </button>
                 </div>
             </div>
-            <div className='flex gap-10 justify-between'>
-                <div className='flex flex-col gap-2 w-3/4'>
+            <div className='flex flex-col gap-5 md:gap-10 md:flex-row'>
+                <div className='w-full md:w-3/5'>
                     <label htmlFor="code" className='text-white text-xl'>Code</label>
                     <AceEditor
                         value={submission.code}
@@ -109,13 +109,13 @@ const CodeSnippet = () => {
                     />
                 </div>
 
-                <div className='flex flex-col gap-2'>
+                <div className='w-full md:w-2/5'>
                     <label htmlFor="output" className='text-white text-xl'>Output</label>
                     <textarea name="output" 
                         id="output"
                         cols="60"
                         rows="10"
-                        className='border-4 bg-black border-slate-600 rounded text-white font-mono p-2 hover:border-slate-500'
+                        className='border-4 bg-black border-slate-600 rounded text-white font-mono p-2 hover:border-slate-500 w-full'
                         value={output}
                         readOnly
                     />
