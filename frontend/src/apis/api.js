@@ -6,7 +6,7 @@ export const getPong = async () => {
 }
 
 export const getSubmissionOutput = async (submission) => {
-    const response = await ky.post('https://api.kcterala.in/hello', {
+    const response = await ky.post('https://api.kcterala.in/submission', {
         json: {
             ...submission
         }
